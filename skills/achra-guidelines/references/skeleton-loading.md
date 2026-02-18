@@ -9,7 +9,7 @@ Guidelines for creating skeleton loading states that mirror existing UI layout, 
 - Skeletons are visual-only placeholders, not interactive UI.
 - Preserve the original layout to prevent layout shift.
 - Prefer shared patterns and existing skeleton components.
-- Use the shared `Skeleton` component from `@/modules/shared/components/ui/skeleton`.
+- Use the shared `Skeleton` component from `@/shared/components/ui/skeleton`.
 
 ---
 
@@ -123,8 +123,8 @@ See [skeleton-loading-examples.md](skeleton-loading-examples.md) for examples wi
 Use absolute imports:
 
 ```tsx
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
+import { Skeleton } from '@/shared/components/ui/skeleton'
+import { cn } from '@/shared/lib/utils'
 ```
 
 ---

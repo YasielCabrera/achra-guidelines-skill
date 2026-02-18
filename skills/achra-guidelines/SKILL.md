@@ -26,15 +26,14 @@ Reference these guidelines when:
 
 | Topic | Rule | Details |
 |-------|------|---------|
-| **Module placement** | Shared vs domain | Used in 2+ modules or app root → `modules/shared/`. Single domain → `modules/{domain}/`. See [architecture.md](references/architecture.md). |
+| **Module placement** | Shared vs domain, promotion rules | Used in 2+ modules or app root → check [Promotion rules](references/architecture.md#promotion-rules); single domain → `modules/{domain}/`. See [architecture.md](references/architecture.md). |
 | **Naming** | kebab-case | Files and directories: `component-name.tsx`, `use-hook-name.ts`. See [conventions.md](references/conventions.md). |
 | **Components** | Directory + index | One dir per component; **one component per file** (subcomponents in separate files). Helpers in **lib/utils**, not in component files. Named function, named export. See [conventions.md](references/conventions.md). |
 | **Feature flags** | Shared, env-specific | `modules/shared/lib/feature-flags/`. Use for gating domains/sections (workstreams, finances, roadmaps). See [feature-flags-and-env.md](references/feature-flags-and-env.md). |
-| **Routing** | App router, network scope | Global routes under `(achra)`; network-scoped under `app/network/[slug]/...`. |
 | **Data / GraphQL** | Domain graphql, generated | Queries in `modules/<domain>/graphql/*.graphql`; generated in `modules/__generated__/graphql/`. See [data-and-graphql.md](references/data-and-graphql.md). |
-| **Types** | Props in component file; reusable at module root only | Component props MUST live in the same component file. Reusable types go in `types.ts` at module root or in root-level `types/` (e.g. types/transaction.ts); never in lib/, utils/, or other subfolders. No index or inner types.ts in types/. See [conventions.md](references/conventions.md). |
+| **Types** | Props in file; reusable at module root | [conventions.md](references/conventions.md) |
 | **Tech stack** | Next 16, React 19, TS, Tailwind 4, shadcn, GraphQL + TanStack Query | Framework, UI, data, forms, and tooling. See [tech-stack.md](references/tech-stack.md). |
-| **Skeleton loading** | Mirror layout with Skeleton | Use `Skeleton` from `@/modules/shared/components/ui/skeleton`; place `*-skeleton.tsx` next to source component. See [skeleton-loading.md](references/skeleton-loading.md). |
+| **Skeleton loading** | Mirror layout with Skeleton | Use `Skeleton` from `@/shared/components/ui/skeleton`; place `*-skeleton.tsx` next to source component. See [skeleton-loading.md](references/skeleton-loading.md). |
 
 ## Skeleton loading
 
@@ -49,7 +48,7 @@ Skeleton loading is an Achra pattern for loading states. Use it for route loadin
 - Use `bg-border` on skeletons inside `bg-accent`, `bg-muted`, or `bg-secondary`.
 - Reuse existing skeleton subcomponents when available.
 
-**Required import:** `import { Skeleton } from '@/modules/shared/components/ui/skeleton'`
+**Required import:** `import { Skeleton } from '@/shared/components/ui/skeleton'`
 
 Full rules, sizing, contrast, and accessibility: [skeleton-loading.md](references/skeleton-loading.md). Patterns and examples: [skeleton-loading-examples.md](references/skeleton-loading-examples.md).
 
@@ -58,7 +57,7 @@ Full rules, sizing, contrast, and accessibility: [skeleton-loading.md](reference
 Full documentation:
 
 - [achra-overview.md](references/achra-overview.md) — Business and product context; main domains and where they live
-- [architecture.md](references/architecture.md) — Module layout, shared vs domain, placement decision tree, imports
+- [architecture.md](references/architecture.md) — Module layout, shared vs domain, promotion rules, placement decision tree, imports
 - [conventions.md](references/conventions.md) — Naming, component directories, exports
 - [feature-flags-and-env.md](references/feature-flags-and-env.md) — When and where to use feature flags; env behavior
 - [data-and-graphql.md](references/data-and-graphql.md) — GraphQL and services location; generated code
@@ -66,3 +65,4 @@ Full documentation:
 - [skeleton-loading.md](references/skeleton-loading.md) — Skeleton loaders: layout mirroring, sizing, contrast, cleanup, validation
 - [skeleton-loading-examples.md](references/skeleton-loading-examples.md) — Skeleton patterns and code examples
 - [achra-guidelines.md](references/achra-guidelines.md) — Human-facing index with table of contents and links
+- [rules/](references/rules/) — Granular rules (arch-, conv-, ff-, data-)

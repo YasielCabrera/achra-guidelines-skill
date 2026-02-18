@@ -1,6 +1,6 @@
 ---
 title: Rule Title Here
-category: arch | conv | ff | data | routing
+category: arch | conv | ff | data
 tags: tag1, tag2
 ---
 

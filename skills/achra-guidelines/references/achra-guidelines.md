@@ -2,7 +2,7 @@
 
 **Version 0.1.0 (draft)**
 
-This document is the human-facing index for Achra platform guidelines. It covers architecture, conventions, business domains, feature flags, data/routing, and granular rules.
+This document is the human-facing index for Achra platform guidelines. It covers architecture, conventions, business domains, feature flags, data, and granular rules.
 
 ---
 
@@ -80,5 +80,5 @@ How to build skeleton loaders that mirror layout and avoid shift; used for loadi
 
 Short, grep-friendly rules for agents; each file covers one pattern.
 
-- **[_sections.md](rules/_sections.md)** — Section list and filename prefixes (arch-, conv-, ff-, data-, routing-).
+- **[_sections.md](rules/_sections.md)** — Section list and filename prefixes (arch-, conv-, ff-, data-).
 - **rules/** — Individual rule files (e.g. arch-module-placement.md, conv-kebab-case.md, ff-when-to-use.md). Use grep to find a topic: `grep -l "placement" references/rules/`.
