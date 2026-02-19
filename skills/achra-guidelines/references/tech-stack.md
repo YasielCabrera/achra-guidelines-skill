@@ -8,7 +8,7 @@ Frameworks, UI libraries, data layer, and tooling used in the Achra project. Use
 
 | Technology | Notes |
 |------------|--------|
-| **Next.js** | 16.x. App Router, typed routes (`typedRoutes: true`), React Compiler (`reactCompiler: true`), cache components (`cacheComponents: true`), Turbopack (with file-system cache in dev). See `next.config.ts`. |
+| **Next.js** | 16.x. App Router, typed routes (`typedRoutes: true`), React Compiler (`reactCompiler: true`), cache components (`cacheComponents: true`), Turbopack (with file-system cache in dev). Server actions for mutations and form submissions; placement in `modules/<module>/actions/`. See `next.config.ts` and [architecture.md](architecture.md). |
 | **React** | 19.x. Used with React Compiler (Babel plugin). |
 
 ## Language and types

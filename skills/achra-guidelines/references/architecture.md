@@ -19,6 +19,7 @@ Nothing lives in a generic `app/components/`, `components/`, or `src/components/
 
 ```
 modules/shared/
+  ├── actions/      # Shared server actions (optional)
   ├── components/   # Shared UI (app-sidebar, site-header, ui primitives)
   ├── hooks/        # Shared React hooks
   ├── lib/          # Shared utilities (feature-flags, fetcher, utils)
@@ -37,6 +38,7 @@ modules/shared/
 
 ```
 modules/{module-name}/
+  ├── actions/      # Module-specific server actions (optional)
   ├── components/   # Module-specific components
   ├── lib/          # Module-specific utilities
   ├── hooks/        # Module-specific hooks
@@ -148,6 +150,18 @@ import { useTransactionForm } from '@/modules/transaction/hooks/use-transaction-
 
 Use `@/shared/` for shared module imports and `@/modules/` for domain modules; do not use relative paths that escape the module (e.g. `../../../shared/`).
 
+## Server actions
+
+**Location**: `modules/<module>/actions/` — One action per file; file and function names end with `action`.
+
+Apply the same [Promotion rules](#promotion-rules) as other elements.
+
+```typescript
+import { submitTransactionAction } from '@/modules/transaction/actions/submit-transaction-action'
+```
+
+See [arch-server-actions.md](rules/arch-server-actions.md) for full rules.
+
 ## Best practices
 
 1. **Keep modules focused** — One domain or feature area per module.
@@ -174,6 +188,8 @@ modules/
   │   └── hooks/
   │       └── use-mobile.ts
   └── transaction/
+      ├── actions/
+      │   └── submit-transaction-action.ts
       ├── components/
       │   ├── transaction-list/
       │   │   ├── transaction-list.tsx
