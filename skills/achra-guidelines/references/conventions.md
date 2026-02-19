@@ -51,6 +51,7 @@ modules/shared/components/app-sidebar/
 Each component file (`*.tsx`) must contain **exactly one** component (the one that matches the file name).
 
 - Additional components used only by that component belong in **separate files** in the same directory (subcomponents). Do not define multiple unrelated components in a single file.
+- **Exception:** Composition-pattern components may keep all subcomponents in the main file when they are small, tightly coupled, and exported as a single compound object (e.g. `export const Card = { Root, Header, Row }`). See [conv-one-component-per-file](rules/conv-one-component-per-file.md).
 
 ### Helpers and pure logic
 
@@ -145,6 +146,7 @@ export function Button() {}  // Prefer export { Button } at end
 - Use kebab-case for their file names.
 - Use the same function + named-export pattern.
 - Re-export from `index.ts` only if they are used outside this directory.
+- **Exception:** Composition-pattern components may keep all subcomponents in the main file when they are small, tightly coupled, and exported as a single compound object.
 
 ## Quick reference
 
@@ -156,7 +158,7 @@ export function Button() {}  // Prefer export { Button } at end
 | Export | Named: `export { ComponentName }` at end of file |
 | Function | Named function, not arrow |
 | Subcomponents | Same dir; re-export only when used elsewhere |
-| One component per file | Each `.tsx` file contains exactly one component; others in separate files |
+| One component per file | Each `.tsx` file contains exactly one component; others in separate files; exception for composition-pattern components |
 | Helpers | In `lib/` or utils, not in component files |
 | Component props | In the same component file only |
 | Reusable types | At module root only: `types.ts` or `types/` (e.g. types/transaction.ts); never in lib/, utils/, or other subfolders; no index or inner types.ts; interfaces, type aliases, enums |
