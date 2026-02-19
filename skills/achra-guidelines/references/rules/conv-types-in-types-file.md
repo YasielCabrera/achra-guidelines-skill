@@ -18,8 +18,9 @@ export interface CalculatedBalance {
 }
 export function getBalance(): CalculatedBalance { /* ... */ }
 
-// lib/feature-flags/types.ts — wrong: types.ts inside a subfolder (all types at module root only)
-export interface FeatureFlags { /* ... */ }
+// lib/subfeature/types.ts — wrong: types.ts inside a lib subfolder (all types at module root only).
+// Exception: modules/shared/lib/feature-flags/types.ts is intentional—feature-flags is a self-contained submodule.
+export interface SubfeatureConfig { /* ... */ }
 
 // component-name.tsx — wrong: props in separate file
 // Props type lives in types.ts or another file
@@ -47,3 +48,5 @@ function Button({ children, variant = 'primary' }: ButtonProps) { /* ... */ }
 ```
 
 Reference: [conventions.md](../conventions.md), [architecture.md](../architecture.md)
+
+Full rules: [conventions.md § Types placement](../conventions.md#types-placement)

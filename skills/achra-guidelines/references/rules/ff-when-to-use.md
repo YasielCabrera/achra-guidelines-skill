@@ -13,7 +13,7 @@ Feature flags live in `modules/shared/lib/feature-flags/`. Use them to gate whol
 **Correct:** Gating a route or section that should be on in dev/staging and off (or different) in production.
 
 ```typescript
-import ff from '@/modules/shared/lib/feature-flags'
+import ff from '@/shared/lib/feature-flags'
 
 if (ff.workstreams.WORKSTREAMS_ENABLED) {
   // show workstreams nav / content

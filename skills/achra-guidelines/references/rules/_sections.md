@@ -19,7 +19,3 @@ This file defines all sections, their ordering, and descriptions. The section ID
 ## 4. Data and GraphQL (data)
 
 **Description:** Location of GraphQL operations and generated code; how services use them. Keeps data access patterns consistent.
-
-## 5. Routing (routing)
-
-**Description:** App Router structure, global vs network-scoped routes, loading and error UI. Ensures new pages follow existing route patterns.

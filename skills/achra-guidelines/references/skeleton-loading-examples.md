@@ -238,8 +238,8 @@ This suggests the page is just a header; if the page has header + body + list, t
 **Prefer (same structure as the page):**
 ```tsx
 // app/.../loading.tsx
-import { PageContent } from '@/modules/shared/components/page-containers'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { PageContent } from '@/shared/components/page-containers'
+import { Skeleton } from '@/shared/components/ui/skeleton'
 
 export default function Loading() {
   return (

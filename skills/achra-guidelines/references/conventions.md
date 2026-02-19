@@ -60,12 +60,15 @@ Helper functions, formatters, and non-React utilities must **not** live inside c
 
 ### Types placement
 
+**Summary:** Component props in component file; reusable types at module root only (`types.ts` or `types/`). Never in lib/, utils/, or subfolders. No index.ts or types.ts inside types/.
+
 - **Component props:** MUST live in the same component file. Do not move props types to a separate file (no component-local `types.ts` for props).
 - **Reusable / intermediate types** (used in more than one file in the same module, or across modules) must live **only at the root of the module** — never inside `lib/`, `utils/`, or other subfolders:
   - **Default:** a single **types.ts** file at module root (e.g. `modules/{module}/types.ts`, `modules/shared/types.ts`).
   - **When types.ts grows too much:** use a **types/** folder at module root and split into domain-specific files (e.g. `modules/{module}/types/transaction.ts`, `modules/{module}/types/something.ts`, `modules/{module}/types/something-else.ts`). The types folder has **no** `index.ts` and **no** `types.ts` inside it; types are exported directly from the file they live in. Consumers import from the specific file (e.g. `from '@/modules/expense-reports/types/transaction'`).
 - In types (file or folder) live: **interfaces**, **type** aliases, and **enums**.
 - **Do not** put reusable types in `lib/`, `utils/`, or any other subfolder; do not define them in component files. Export them only from the module root `types.ts` or from a file inside the module root `types/` folder and import where needed.
+- **Exception:** The feature-flags module (`modules/shared/lib/feature-flags/`) is a self-contained submodule with its own `types.ts` co-located with its implementation (ff.dev.ts, ff.staging.ts, etc.). This is intentional; do not move feature-flags types to `modules/shared/types/`.
 
 **Don’t** (reusable type in utils):
 

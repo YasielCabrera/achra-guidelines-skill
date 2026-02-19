@@ -32,7 +32,7 @@ Do **not** use them for:
 Import the default export from the feature-flags module and read the appropriate flag:
 
 ```typescript
-import ff from '@/modules/shared/lib/feature-flags'
+import ff from '@/shared/lib/feature-flags'
 
 if (ff.workstreams.WORKSTREAMS_ENABLED) {
   // show workstreams nav / content
