@@ -1,6 +1,6 @@
 ---
 name: achra-guidelines
-description: Achra Platform guidelines, business rules, architecture, and engineering patterns. Use when writing or refactoring Achra code, adding modules or components, creating or updating skeleton loaders, loading placeholders, Suspense fallbacks, or Next.js loading.tsx, answering questions about Achra architecture or business domains, deciding when to use feature flags, applying Achra naming and placement conventions, or answering which technologies and libraries the project uses.
+description: Achra Platform guidelines, business rules, architecture, and engineering patterns. Use when writing or refactoring Achra code, adding modules or components, creating or updating skeleton loaders, loading placeholders, Suspense fallbacks, or Next.js loading.tsx, writing or reviewing Storybook stories, answering questions about Achra architecture or business domains, deciding when to use feature flags, applying Achra naming and placement conventions, or answering which technologies and libraries the project uses.
 ---
 
 # Achra Guidelines
@@ -15,6 +15,7 @@ Achra platform guidelines for architecture, conventions, business domains, and t
 
 Reference these guidelines when:
 - Writing new code in the Achra codebase (components, pages, services, hooks, providers, etc)
+- Writing or reviewing Storybook stories
 - Creating skeleton loaders, loading placeholders, Suspense fallbacks, or Next.js loading.tsx
 - Refactoring or reviewing code for Achra consistency
 - Adding a new module, feature, or route
@@ -33,8 +34,28 @@ Reference these guidelines when:
 | **Data / GraphQL** | Domain graphql, generated | Queries in `modules/<domain>/graphql/*.graphql`; generated in `modules/__generated__/graphql/`. See [data-and-graphql.md](references/data-and-graphql.md). |
 | **Types** | Props in file; reusable at module root | [conventions.md](references/conventions.md) |
 | **Tech stack** | Next 16, React 19, TS, Tailwind 4, shadcn, GraphQL + TanStack Query | Framework, UI, data, forms, and tooling. See [tech-stack.md](references/tech-stack.md). |
+| **Storybook stories** | Sections/pages + reusable components; min variants | Create for section/page and shared components; skip one-time small components; cover Default, Loading, Empty, Error. See [storybook-stories.md](references/storybook-stories.md). |
 | **Skeleton loading** | Mirror layout with Skeleton | Use `Skeleton` from `@/shared/components/ui/skeleton`; place `*-skeleton.tsx` next to source component. See [skeleton-loading.md](references/skeleton-loading.md). |
 | **Server actions** | actions/, one per file, suffix action | In `modules/<module>/actions/`; file and function names end with `action`. See [architecture.md](references/architecture.md). |
+
+## Storybook stories
+
+Stories serve two purposes: **documentation** for reusable/shared components and **visual regression testing** via Chromatic on every PR.
+
+**When to create a story:** For section-level and page-level components, and for any reusable component (especially in `modules/shared/`). Skip one-time small components — write the story on the parent section component instead.
+
+**Variants:** Only create variants that produce visually distinct UI states. Default, Loading, Empty, and Error cover most components. Avoid prop-permutation variants that look identical in Chromatic.
+
+**Key patterns:**
+- Colocate `[component-name].stories.tsx` next to the component file
+- Import from `@storybook/nextjs-vite`
+- Use `layout: 'fullscreen'` for sections, `'centered'` for isolated components
+- Use shared decorators from `modules/shared/lib/decorators.tsx`: `withNuqsAdapter`, `withReactQueryProvider`, `withPortalFontStyles`
+- Mock API calls with MSW (`parameters.msw.handlers`); use `delay('infinite')` for the Loading variant
+- Place mock data in `modules/{module}/mocks/`, not inline in story files
+- Use `tags: ['autodocs']` only on shared UI components
+
+Full rules, patterns, and examples: [storybook-stories.md](references/storybook-stories.md).
 
 ## Skeleton loading
 
@@ -63,6 +84,7 @@ Full documentation:
 - [feature-flags-and-env.md](references/feature-flags-and-env.md) — When and where to use feature flags; env behavior
 - [data-and-graphql.md](references/data-and-graphql.md) — GraphQL and services location; generated code
 - [tech-stack.md](references/tech-stack.md) — Framework, UI, data, forms, and tooling used in the project
+- [storybook-stories.md](references/storybook-stories.md) — When to create stories, variant policy, file placement, title convention, decorators, MSW, mock data
 - [skeleton-loading.md](references/skeleton-loading.md) — Skeleton loaders: layout mirroring, sizing, contrast, cleanup, validation
 - [skeleton-loading-examples.md](references/skeleton-loading-examples.md) — Skeleton patterns and code examples
 - [achra-guidelines.md](references/achra-guidelines.md) — Human-facing index with table of contents and links
