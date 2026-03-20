@@ -71,6 +71,42 @@ Helper functions, formatters, and non-React utilities must **not** live inside c
 - **Do not** put reusable types in `lib/`, `utils/`, or any other subfolder; do not define them in component files. Export them only from the module root `types.ts` or from a file inside the module root `types/` folder and import where needed.
 - **Exception:** The feature-flags module (`modules/shared/lib/feature-flags/`) is a self-contained submodule with its own `types.ts` co-located with its implementation (ff.dev.ts, ff.staging.ts, etc.). This is intentional; do not move feature-flags types to `modules/shared/types/`.
 
+### Constants placement
+
+**Summary:** Module-level constants in `modules/{module}/lib/constants.ts` only. One `constants.ts` per module; never at module root, in subfolders of lib/, or in component files.
+
+- **Module-level constants** (magic numbers, config values, string literals, option arrays, default values, etc.) must live in a single **`constants.ts`** file inside the module's `lib/` folder: `modules/{module}/lib/constants.ts`.
+- Each module has **at most one** `constants.ts`. Do not create multiple constants files (e.g. `lib/format-constants.ts`, `lib/api-constants.ts`) or nest them in subfolders (e.g. `lib/balance/constants.ts`).
+- Do not place `constants.ts` at the module root (e.g. `modules/{module}/constants.ts`); it belongs inside `lib/`.
+- Use **UPPER_SNAKE_CASE** for constant names and **named exports**.
+
+**Don't** (constants scattered):
+
+```typescript
+// modules/expense-reports/constants.ts — wrong: at module root instead of lib/
+export const DEFAULT_CURRENCY = 'USD'
+
+// modules/expense-reports/lib/balance/constants.ts — wrong: nested in a subfolder
+export const MAX_ITEMS = 50
+
+// modules/expense-reports/components/transaction-list/transaction-list.tsx — wrong: shared constant in component file
+const STATUS_OPTIONS = ['pending', 'approved', 'rejected'] as const
+```
+
+**Do** (single constants file in lib/):
+
+```typescript
+// modules/expense-reports/lib/constants.ts
+export const DEFAULT_CURRENCY = 'USD'
+export const MAX_ITEMS = 50
+export const STATUS_OPTIONS = ['pending', 'approved', 'rejected'] as const
+
+// modules/expense-reports/components/transaction-list/transaction-list.tsx — import from constants
+import { STATUS_OPTIONS } from '@/modules/expense-reports/lib/constants'
+```
+
+See [conv-constants-placement](rules/conv-constants-placement.md).
+
 **Don’t** (reusable type in utils):
 
 ```typescript
@@ -162,3 +198,4 @@ export function Button() {}  // Prefer export { Button } at end
 | Helpers | In `lib/` or utils, not in component files |
 | Component props | In the same component file only |
 | Reusable types | At module root only: `types.ts` or `types/` (e.g. types/transaction.ts); never in lib/, utils/, or other subfolders; no index or inner types.ts; interfaces, type aliases, enums |
+| Constants | One `constants.ts` per module in `lib/` (`modules/{module}/lib/constants.ts`); UPPER_SNAKE_CASE; named exports |

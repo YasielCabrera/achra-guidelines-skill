@@ -33,6 +33,7 @@ Reference these guidelines when:
 | **Feature flags** | Shared, env-specific | `modules/shared/lib/feature-flags/`. Use for gating domains/sections (workstreams, finances, roadmaps). See [feature-flags-and-env.md](references/feature-flags-and-env.md). |
 | **Data / GraphQL** | Domain graphql, generated | Queries in `modules/<domain>/graphql/*.graphql`; generated in `modules/__generated__/graphql/`. See [data-and-graphql.md](references/data-and-graphql.md). |
 | **Types** | Props in file; reusable at module root | [conventions.md](references/conventions.md) |
+| **Constants** | One `constants.ts` per module in `lib/`; UPPER_SNAKE_CASE | [conventions.md](references/conventions.md) |
 | **Tech stack** | Next 16, React 19, TS, Tailwind 4, shadcn, GraphQL + TanStack Query | Framework, UI, data, forms, and tooling. See [tech-stack.md](references/tech-stack.md). |
 | **Storybook stories** | Sections/pages + reusable components; min variants | Create for section/page and shared components; skip one-time small components; cover Default, Loading, Empty, Error. See [storybook-stories.md](references/storybook-stories.md). |
 | **Skeleton loading** | Mirror layout with Skeleton | Use `Skeleton` from `@/shared/components/ui/skeleton`; place `*-skeleton.tsx` next to source component. See [skeleton-loading.md](references/skeleton-loading.md). |

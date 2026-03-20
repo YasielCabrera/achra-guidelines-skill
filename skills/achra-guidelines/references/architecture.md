@@ -22,7 +22,7 @@ modules/shared/
   ├── actions/      # Shared server actions (optional)
   ├── components/   # Shared UI (app-sidebar, site-header, ui primitives)
   ├── hooks/        # Shared React hooks
-  ├── lib/          # Shared utilities (feature-flags, fetcher, utils)
+  ├── lib/          # Shared utilities (feature-flags, fetcher, utils, constants.ts)
   ├── providers/    # Shared context providers
   ├── types/        # Types at module root only. See [conventions.md § Types placement](conventions.md#types-placement)
   └── config/       # Shared config (e.g. navbar)
@@ -40,7 +40,7 @@ modules/shared/
 modules/{module-name}/
   ├── actions/      # Module-specific server actions (optional)
   ├── components/   # Module-specific components
-  ├── lib/          # Module-specific utilities
+  ├── lib/          # Module-specific utilities (constants.ts)
   ├── hooks/        # Module-specific hooks
   ├── providers/    # Module-specific context (if needed)
   ├── types/        # Types at module root only. See [conventions.md § Types placement](conventions.md#types-placement)
